@@ -1,0 +1,57 @@
+  .single-column {
+    /*padding-left: 28%;*/
+    /*padding-right: 28%;*/
+
+    margin: auto;
+    width: 55%;
+    padding: 25px;
+  }
+
+  .double-column {
+    float: left;
+    width: 50%;
+    padding: 7.5px 2.5% 150px;
+
+  }
+
+  .textbox-style {
+    padding-top: 5%;
+    text-align: justify;
+    font-family: proxima-nova, sans-serif !important;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: rgb(65, 90, 145);
+    text-transform: uppercase;
+    line-height: 1.5em;
+  }
+
+  .subtextbox-style {
+    padding-top: 2%;
+    text-align: left;
+  }
+
+  .textbox-header {
+    padding-top: 5%;
+    text-align: center;
+    font-family: proxima-nova, sans-serif !important;
+    font-style: normal;
+    font-size: 33px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: rgb(65, 90, 145);
+    text-transform: uppercase;
+  }
+
+  .textbox-subheader {
+    text-align: center;
+    font-family: proxima-nova, sans-serif !important;
+    font-style: normal;
+    font-size: 25px;
+    padding-top: 2.5%;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: rgb(65, 90, 145);
+    text-transform: uppercase;
+  }

@@ -1,0 +1,89 @@
+
+*:focus {
+  outline: none !important;
+}
+
+#App {
+
+  font-family: "Open Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  margin: 0
+}
+
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.kankei-content-box {
+  height: calc(100vh - 80px);
+  box-shadow: inset 0px 12px 18px -12px rgba(0, 0, 0, 0.75);
+  overflow-y: auto;
+  /*option 1 :: symetric */
+  /*background-image: url("../assets/background-graph-sym.jpg");*/
+  /*background-size: 100% 750px;*/
+  /*background-repeat : no-repeat;*/
+  /*background-position: bottom;*/
+
+}
+
+.background-image {
+  position: absolute;
+  height: calc(100vh - 80px);
+  background-attachment: fixed;
+  width: 100%;
+  background-image: url("../assets/background-graph1.jpg");
+  background-size: cover;
+  z-index: -1;
+  opacity: 0.75;
+  background-position: center;
+}
+
+/*global boostrap setting */
+.card {
+  border: 0px;
+  border-radius: 0px;
+}
+
+
+/* global variable placed on root for convenience (also because i suck wiht CSS) */
+:root {
+  --kankei-header-height: 80px;
+  --kankei-navpanel-height: 163px;
+  --kankei-searchpanel-height: 319px
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: rgb(98, 131, 203);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(108, 141, 213);
+}
+
+
+.kankei-error {
+  color: red;
+  border-color: red;
+  background: lightpink;
+  border-width: 2px;
+  text-align: left;
+  padding: 2px 10px;
+  border-style: solid;
+}
