@@ -240,7 +240,7 @@ export default {
     border-bottom-left-radius: 20%;
     right: 0;
     font-size: 18px;
-    font-family: Courier, Sans-Serif, monospace;
+    font-family: Roboto, sans-serif, monospace;
     transition: all 0.1s ease 0s;
     user-select: none;
   }

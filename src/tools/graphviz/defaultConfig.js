@@ -9,13 +9,8 @@ const defaultConfig = {
     labelHighlightBold: false,
     font: {
       color: 'white',
-      bold: {
-        // color: '#343434',
-        size: 14, // px
-        face: 'arial',
-        vadjust: 0,
-        mod: 'bold',
-      },
+      face: 'arial',
+      bold: true,
     },
     borderWidth: 3,
     borderWidthSelected: 3,
@@ -71,6 +66,9 @@ const defaultConfig = {
     Meaning: {
       color: green,
       shape: 'box',
+      widthConstraint: {
+        maximum: 100,
+      },
     },
     WordInfo: {
       color: grey,
