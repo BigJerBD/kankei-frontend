@@ -1,13 +1,18 @@
 function makeTitle(dataObject) {
-  return Object.keys(dataObject).reduce(
-    (prev, val, key, res) => `${res}<strong>${key}:</strong> ${val}<br>`,
-    '',
-  );
+  return Object.keys(dataObject)
+    .reduce(
+      // eslint-disable-next-line no-unused-vars
+      (prev, key, num, _) => `${prev}<strong>${key}:</strong> ${dataObject[key]}<br> \n`,
+      '',
+    );
 }
 
 export function appendDataToTitle(elem, dataField, titleField) {
   const result = elem;
-  result[titleField] = makeTitle(elem[dataField]);
+  const title = makeTitle(elem[dataField]);
+  if (title) {
+    result[titleField] = title;
+  }
   return result;
 }
 
@@ -38,14 +43,15 @@ export function forwardLabel(elem, mapping, multipleType, labelField, typeField,
 export function forwardNodeGroup(elem, groups) {
   const result = elem;
   result.group = 'none';
-  Object.keys(groups).forEach((i) => {
-    const group = groups[i];
-    if (result.labels.includes(group)) {
-      result.group = group;
+  Object.keys(groups)
+    .forEach((i) => {
+      const group = groups[i];
+      if (result.labels.includes(group)) {
+        result.group = group;
+        return null;
+      }
       return null;
-    }
-    return null;
-  });
+    });
 
   return result;
 }
@@ -53,13 +59,14 @@ export function forwardNodeGroup(elem, groups) {
 export function forwardLinkGroup(elem, groups) {
   const res = elem;
   res.group = 'none';
-  Object.keys(groups).forEach((id) => {
-    const group = groups[id];
-    if (elem.type === id) {
-      res.group = group;
+  Object.keys(groups)
+    .forEach((id) => {
+      const group = groups[id];
+      if (elem.type === id) {
+        res.group = group;
+        return null;
+      }
       return null;
-    }
-    return null;
-  });
+    });
   return res;
 }

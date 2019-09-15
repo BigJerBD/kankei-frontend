@@ -11,7 +11,8 @@ import {
 
 // todo :: util function because i know nothing about js
 function applyMap(map, func) {
-  return Object.keys(map).map((k) => func(k, map[k]));
+  return Object.keys(map)
+    .map((k) => func(map[k]));
 }
 
 
@@ -45,24 +46,27 @@ export default class GraphViz {
 
     if (typeof config.data === 'object') {
       const { data } = config;
-      this.nodes = applyMap(
-        typeof data.nodes === 'object' ? data.nodes : {}, this.addNode,
+      applyMap(
+        typeof data.nodes === 'object' ? data.nodes : {},
+        this.addNode.bind(this),
       );
-      this.edges = applyMap(
-        typeof data.relationships === 'object' ? data.relationships : {}, this.addEdge,
+      applyMap(
+        typeof data.relationships === 'object' ? data.relationships : {},
+        this.addEdge.bind(this),
       );
     }
   }
 
   addNode(node) {
     let nodeResult = appendDataToTitle(node, 'data', 'title');
+
     nodeResult = forwardLabel(nodeResult, this.config.node.labelMap,
       true,
       'label',
       'labels',
       'data');
     nodeResult = forwardNodeGroup(nodeResult, this.config.node.groups || []);
-    nodeResult.value = nodeResult.value || 1;
+    // nodeResult.value = nodeResult.value || 1;
     this.nodes[nodeResult.id] = nodeResult;
   }
 
@@ -74,36 +78,39 @@ export default class GraphViz {
       'type',
       'data');
     edgeResult = forwardLinkGroup(edgeResult, this.config.edge.groups || []);
-    edgeResult.value = edgeResult.value || 1;
+    // edgeResult.value = edgeResult.value || 1;
     this.edges[edgeResult.id] = edgeResult;
   }
 
   addRecord(record) {
     const self = this;
 
-    Object.values(record).forEach((v) => {
-      if (v.constructor.name === 'Node') {
-        const node = self.buildNodeVisObject(v);
+    Object.values(record)
+      .forEach((v) => {
+        if (v.constructor.name === 'Node') {
+          const node = self.buildNodeVisObject(v);
 
-        try {
-          self.addNode(node);
-        } catch (e) {
-          console.log(e);
-        }
-      } else if (v.constructor.name === 'Relationship') {
-        const edge = self.buildEdgeVisObject(v);
+          try {
+            self.addNode(node);
+          } catch (e) {
+            console.log(e);
+          }
+        } else if (v.constructor.name === 'Relationship') {
+          const edge = self.buildEdgeVisObject(v);
 
-        try {
-          self.addEdge(edge);
-        } catch (e) {
-          console.log(e);
+          try {
+            self.addEdge(edge);
+          } catch (e) {
+            console.log(e);
+          }
         }
-      }
-    });
+      });
   }
 
 
-  renderData() {
+  render() {
+    console.log(this.nodes);
+    console.log(this.edges);
     const config = defaultConfig;
     const { container } = this;
     this.data = {
@@ -111,13 +118,10 @@ export default class GraphViz {
       edges: new vis.DataSet(Object.values(this.edges)),
     };
 
-    console.log(this.data.nodes);
-    console.log(this.data.edges);
-
     this.network = new vis.Network(container, this.data, config);
     // todo :: move to the proper location
     // todo :: put the move location in the config
-    this.network.moveTo({});
+    // this.network.moveTo({});
     setTimeout(() => {
       this.network.stopSimulation();
     }, 10000);

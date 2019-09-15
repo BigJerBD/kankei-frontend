@@ -1,93 +1,98 @@
+import {
+  blue, green, grey, orange, red,
+} from './colors';
 
 const defaultConfig = {
   nodes: {
-    shape: 'dot',
+    mass: 2,
+    shape: 'circle',
+    labelHighlightBold: false,
     font: {
-      size: 26,
-      strokeWidth: 4,
-    },
-    scaling: {
-      label: {
-        enabled: true,
+      color: 'white',
+      bold: {
+        // color: '#343434',
+        size: 14, // px
+        face: 'arial',
+        vadjust: 0,
+        mod: 'bold',
       },
+    },
+    borderWidth: 3,
+    borderWidthSelected: 3,
+    widthConstraint: {
+      minimum: 40,
+    },
+    heightConstraint: {
+      minimum: 40,
     },
   },
   edges: {
     arrows: {
       to: { enabled: true },
     },
-    length: 1000,
+    width: 5,
+    length: 25,
   },
   layout: {
-    improvedLayout: true,
+    improvedLayout: false,
     hierarchical: {
-      enabled: true,
-      levelSeparation: 150,
-      nodeSpacing: 200,
-      treeSpacing: 400,
-      blockShifting: true,
-      edgeMinimization: true,
-      parentCentralization: true,
-      direction: 'UD', // UD, DU, LR, RL
-      sortMethod: 'hubsize', // hubsize, directed
+      enabled: false,
+      sortMethod: 'hubsize',
     },
   },
   physics: {
-    solver: 'repulsion',
     adaptiveTimestep: true,
-    repulsion: {
-      centralGravity: 0.2,
-      springLength: 200,
-      springConstant: 0.05,
-      nodeDistance: 100,
-      damping: 0.09,
-    },
     stabilization: {
       iterations: 200,
       fit: true,
     },
-
+  },
+  interaction: {
+    hover: true,
+    // hoverConnectedEdges: true,
+    selectConnectedEdges: false,
   },
   groups: {
     Character: {
-      color: { background: 'blue' },
-      borderWidth: 3,
+      color: blue,
     },
     Component: {
-      color: { background: 'blue' },
-      borderWidth: 3,
-    },
-    Radical: {
-      color: { background: 'blue' },
-      borderWidth: 3,
+      color: blue,
     },
     Kanji: {
-      color: { background: 'blue' },
-      borderWidth: 3,
+      color: blue,
+    },
+    Radical: {
+      color: blue,
     },
     Stroke: {
-      color: { background: 'blue' },
-      borderWidth: 3,
+      color: blue,
     },
     Meaning: {
-      color: { background: 'green' },
-      borderWidth: 3,
-    },
-    Definition: {
-      color: { background: 'green' },
-      borderWidth: 3,
+      color: green,
+      shape: 'box',
     },
     WordInfo: {
-      color: { background: 'grey' },
-      borderWidth: 3,
+      color: grey,
     },
     Word: {
-      color: { background: 'red' },
-      borderWidth: 3,
+      color: red,
+    },
+    Definition: {
+      color: red,
+      size: 1,
+      widthConstraint: {
+        minimum: 5,
+      },
+      heightConstraint: {
+        minimum: 5,
+      },
     },
     Reading: {
-      color: { background: 'orange' },
-      borderWidth: 3,
+      color: orange,
+    },
+    Japanese: {
+      color: orange,
     },
   },
 };

@@ -13,6 +13,8 @@ import '../styles/BaseStyle.css';
 import GraphViz from '../tools/graphviz/graphviz';
 import { runGet } from '../tools/querying';
 
+import 'vis-network/dist/vis-network.css';
+
 let canvas;
 export default {
   name: 'AppContainer',
@@ -20,13 +22,16 @@ export default {
     GraphControlPanel,
   },
   methods: {
-    draw_data(datadict,
+    draw_data(
+      datadict,
       shownProperties = this.defaultShownProperties,
       nodeColoringTypes = this.defaultNodeColoringTypes,
-      linkColoringTypes) {
+      linkColoringTypes,
+    ) {
       if (canvas) {
-        canvas.cleanup();
+        canvas.clearNetwork();
       }
+
       canvas = new GraphViz({
         data: datadict,
         container_id: 'canvas',
@@ -39,6 +44,7 @@ export default {
           groups: linkColoringTypes,
         },
       });
+
       canvas.render();
     },
   },
@@ -84,7 +90,7 @@ export default {
 <style>
 
   #visual-panel {
-    box-shadow: inset 0px 25px 18px -25px rgba(0, 0, 0, 0.75);
+    box-shadow: inset 0 25px 18px -25px rgba(0, 0, 0, 0.75);
     width: 100%;
     height: calc(100% - 80px);
     border-right: 2px;
@@ -97,4 +103,6 @@ export default {
     width: 100%;
     height: 100%;
   }
+
+
 </style>
