@@ -19,7 +19,7 @@
         <div class="m-2"
              v-for="queryField in queryFields.filter((q) => !q.hidden||showHidden)"
              v-bind:key="queryField.name">
-          <div class="search-form-field">
+          <div class="query-form-field">
             <h4>{{queryField.name}}</h4>
 
             <b-form-input
@@ -36,11 +36,11 @@
                 </option>
               </b-form-select>
 
-              <div class="m-1 kankei-subchoice"
+              <div class="kankei-subchoice"
                    v-if=" selectMap[queryField['template_name']] != null ">
                 <div v-for="subfield in queryField.choices[selectMap[queryField['template_name']]]"
                      v-bind:key="subfield.name">
-                  <div class="search-form-field">
+                  <div class="query-form-field">
 
                     <h4>{{subfield.name}}</h4>
                     <b-form-input
@@ -125,15 +125,16 @@ export default {
       this.$eventBus.$emit('graph-result', resultdic);
     },
     reset_input_fields() {
-      Object.keys(this.queryFields).forEach((field) => {
-        const val = this.queryFields[field];
-        if (val.type === 'choice') {
-          // note :: not good but default are not supported in choices
-          this.reset_choice_field(val);
-        } else if (val.default !== null) {
-          this.fieldInputs[val.template_name] = val.default;
-        }
-      });
+      Object.keys(this.queryFields)
+        .forEach((field) => {
+          const val = this.queryFields[field];
+          if (val.type === 'choice') {
+            // note :: not good but default are not supported in choices
+            this.reset_choice_field(val);
+          } else if (val.default !== null) {
+            this.fieldInputs[val.template_name] = val.default;
+          }
+        });
     },
     reset_choice_field(field) {
       const tmptName = field.template_name;
@@ -141,12 +142,13 @@ export default {
       if (selection !== null) {
         const choiceInputs = {};
 
-        Object.keys(field.choices[selection] || []).forEach((subfield) => {
-          const val = field.choices[selection][subfield];
-          if (val.default !== null) {
-            choiceInputs[val.template_name] = val.default;
-          }
-        });
+        Object.keys(field.choices[selection] || [])
+          .forEach((subfield) => {
+            const val = field.choices[selection][subfield];
+            if (val.default !== null) {
+              choiceInputs[val.template_name] = val.default;
+            }
+          });
         this.fieldInputs[tmptName] = [selection, choiceInputs];
       } else {
         this.fieldInputs[tmptName] = [null, {}];
@@ -208,8 +210,8 @@ export default {
     height: calc(100vh - 80px);
   }
 
-  .search-form-field {
-    padding-bottom: 15px;
+  .query-form-field {
+    margin-top: 15px;
   }
 
   .send-form-button {
@@ -247,10 +249,6 @@ export default {
 
   #QueryFormCloseButton:hover {
     color: white;
-  }
-
-  .kankei-subchoice {
-    padding-top: 15px;
   }
 
   .kankei-form-box {

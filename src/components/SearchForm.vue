@@ -86,4 +86,9 @@ export default {
 </script>
 
 <style>
+
+  .search-form-field {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 </style>

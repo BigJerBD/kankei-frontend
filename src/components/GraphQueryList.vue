@@ -56,7 +56,7 @@ export default {
     }
 
     this.$eventBus.$on('query-list', (payLoad) => {
-      if (payLoad && this.currentlySelected) {
+      if (!payLoad && this.currentlySelected) {
         this.currentlySelected.classList.toggle('active');
         this.currentlySelected = null;
       }

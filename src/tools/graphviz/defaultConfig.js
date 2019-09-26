@@ -10,7 +10,6 @@ const defaultConfig = {
     font: {
       color: 'white',
       face: 'arial',
-      bold: true,
     },
     borderWidth: 3,
     borderWidthSelected: 3,
@@ -72,9 +71,45 @@ const defaultConfig = {
     },
     WordInfo: {
       color: grey,
+      shape: 'box',
+      widthConstraint: {
+        maximum: 100,
+      },
+    },
+    Dialect: {
+      color: grey,
+      shape: 'box',
+      widthConstraint: {
+        maximum: 100,
+      },
+    },
+    Usage: {
+      color: grey,
+      shape: 'box',
+      widthConstraint: {
+        maximum: 100,
+      },
+    },
+    PartOfSpeech: {
+      color: grey,
+      shape: 'box',
+      widthConstraint: {
+        maximum: 100,
+      },
+    },
+    Domain: {
+      color: grey,
+      shape: 'box',
+      widthConstraint: {
+        maximum: 100,
+      },
     },
     Word: {
       color: red,
+      shape: 'box',
+      widthConstraint: {
+        maximum: 100,
+      },
     },
     Definition: {
       color: red,

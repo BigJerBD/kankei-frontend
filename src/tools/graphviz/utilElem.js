@@ -52,7 +52,7 @@ export function forwardNodeGroup(elem, groups) {
       }
       return null;
     });
-
+  console.log(result);
   return result;
 }
 
