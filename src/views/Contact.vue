@@ -19,13 +19,13 @@
             back !
           </p>
         </div>
-        <h3 class="textbox-header"><b> Make a donation</b></h3>
-        <div class="textbox-style">
-          <p class="center-text">
-            Hosting a website and trying to make it evolve cost time and money.
-            <br> Feel free to donate a little bit, it would be greatly appreciated!
-          </p>
-        </div>
+<!--        <h3 class="textbox-header"><b> Make a donation</b></h3>-->
+<!--        <div class="textbox-style">-->
+<!--          <p class="center-text">-->
+<!--            Hosting a website and trying to make it evolve cost time and money.-->
+<!--            <br> Feel free to donate a little bit, it would be greatly appreciated!-->
+<!--          </p>-->
+<!--        </div>-->
       </div>
     </div>
   </div>

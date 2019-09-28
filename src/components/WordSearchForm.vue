@@ -2,6 +2,7 @@
   <search-form
     id="WordSearchForm"
     :hitlist-id="'WordSearchFormHitList'"
+    :tooltipOptions="['reading','word','meaning']"
     :title="'Search word'"
     :search-callback="searchWord"
     :select-callback="forwardToCanvas"
@@ -51,7 +52,7 @@ export default {
     transition: all 0.20s ease 0s;
     color: white;
     bottom: 0;
-    margin: -10px 0px 0px 160px;
+    margin: -10px 0px 0px 0px;
     padding: 3px 5px 3px 5px;
     border-radius: 10px;
     border-width: 0px;

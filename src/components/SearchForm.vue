@@ -5,7 +5,17 @@
     <div class="search-form-field ">
       <b-form-input v-model="searchInput"></b-form-input>
     </div>
-    <button class="search-button" @click="handleSearch"> Search</button>
+    <div style="display: flex;padding-top: 10px;">
+      <button class="search-button" @click="handleSearch"> Search</button>
+      <div class="tooltip_button">
+        <div>?</div>
+        <span class="tooltiptext">
+          <b>{{ tooltipOptions.map((x) => '#' + x).join(", ")}}</b> <br>Can be added to your search
+        </span>
+      </div>
+    </div>
+
+
     <div class="hit-list" v-bind:id="hitlistId">
       <div class="hit-element"
            v-for="hit in hits"
@@ -26,7 +36,7 @@
           </div>
           <div class="hit-meaning" v-html="formatMeaningCallback(hit['meanings'])">
           </div>
-        </template >
+        </template>
 
       </div>
     </div>
@@ -41,6 +51,7 @@ export default {
   props: {
     title: String,
     hitlistId: String,
+    tooltipOptions: Array,
     searchCallback: Function,
     selectCallback: Function,
     formatReadingCallback: {
@@ -87,8 +98,46 @@ export default {
 
 <style>
 
+  .tooltip_button {
+    background: rgb(65, 90, 145);
+    -moz-border-radius: 70px;
+    -webkit-border-radius: 70px;
+    border-radius: 5px;
+    margin-left: 125px;
+    margin-top: -10px;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 3px;
+
+    user-select: none;
+  }
+
   .search-form-field {
     margin-top: 15px;
     margin-bottom: 15px;
+  }
+
+
+  .tooltip_button .tooltiptext {
+    visibility: hidden;
+    width: 250px;
+    background-color: rgb(65, 90, 145);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+
+    margin-left: 30px;
+    margin-bottom: 0px;
+    margin-top: -70px;
+
+  }
+
+  .tooltip_button:hover .tooltiptext {
+    visibility: visible;
   }
 </style>
