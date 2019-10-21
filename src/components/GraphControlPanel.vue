@@ -1,6 +1,8 @@
 <template>
   <div>
     <div id="GraphControlPanel" v-bind:class="{active:isActive}">
+      <div id="undo-button" v-bind:class="{empty:undoEmpty,qfactive:queryformActive}"
+           @click="sendUndo()"/>
       <b-card no-body class="panel-box nav-panel">
         <b-tabs pills card>
           <b-tab title="" active>
@@ -54,12 +56,25 @@ export default {
     toggle() {
       this.isActive = !this.isActive;
     },
+    sendUndo() {
+      this.$eventBus.$emit('undo-run', true);
+    },
+  },
+  mounted() {
+    this.$eventBus.$on('undo-empty', (payload) => {
+      this.undoEmpty = payload;
+    });
+    this.$eventBus.$on('queryform-active', (payload) => {
+      this.queryformActive = payload;
+    });
   },
   data() {
     return {
       isActive: true,
       // used to fix chrome-firefox bar allignement problem
       ScrollBarAlign: (navigator.appVersion.indexOf('Chrome/') !== -1) ? '0' : '15',
+      undoEmpty: true,
+      queryformActive: false,
     };
   },
 };
@@ -261,5 +276,45 @@ export default {
 
   #ControlPanelOpenButton:hover .arrow-cover .arrow-right {
     background-color: white;
+  }
+
+  #undo-button {
+    margin-left: 335px;
+    margin-top: 25px;
+    z-index: 2;
+    height: 25px;
+    width: 25px;
+    position: absolute;
+
+    border: solid rgb(78, 111, 183);
+    border-width: 0 10px 10px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+    transition: all 1.17s ease 0s;
+  }
+
+  #GraphControlPanel.active  #undo-button.qfactive {
+    margin-left: 635px;
+    transition: all 1.17s ease 0s;
+  }
+
+  #undo-button.empty {
+    border: solid rgb(111, 144, 214);
+    border-width: 0 10px 10px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+  }
+
+  #undo-button:hover:not(.empty) {
+    border: solid rgb(65, 90, 145);
+    border-width: 0 10px 10px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
   }
 </style>

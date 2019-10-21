@@ -17,23 +17,6 @@ function applyMap(map, func) {
 
 
 export default class GraphViz {
-  /**
-   *
-   * @constructor
-   * @param {object} config - configures the visualization and Neo4j server connection
-   *  {
-   *    container::
-   *    labels:
-   *    relationships:
-   *    data?:{
-   *      nodes: {42:{id:42,label:"A Name", value?:0.5, group?:13, title?:"detailed information"}},
-   *      relationships: {
-   *         11:{id:11, from:42, to: 43, label?:"KNOWS", value?:0.3, title?:"detailed information"}
-   *         }
-   *     }
-   *  }
-   */
-
   constructor(config) {
     this.config = config;
     this.nodes = {};
@@ -43,9 +26,12 @@ export default class GraphViz {
     this.container = document.getElementById(config.container_id);
     this.events = new EventController();
 
+    this.setData(config.data);
+  }
 
-    if (typeof config.data === 'object') {
-      const { data } = config;
+  setData(data) {
+    this.rawData = data;
+    if (typeof data === 'object') {
       applyMap(
         typeof data.nodes === 'object' ? data.nodes : {},
         this.addNode.bind(this),
@@ -107,6 +93,14 @@ export default class GraphViz {
       });
   }
 
+  addEvent(eventName, func) {
+    this.network.on(eventName, func);
+  }
+
+  getNode(id) {
+    console.log(this.nodes);
+    return this.nodes[id];
+  }
 
   render() {
     console.log(this.nodes);

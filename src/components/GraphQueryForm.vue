@@ -83,6 +83,7 @@ export default {
   methods: {
     toggle() {
       this.isActive = !this.isActive;
+      this.$eventBus.$emit('queryform-active', this.isActive);
       if (!this.isActive) {
         this.$eventBus.$emit('query-list', null);
       }
@@ -163,6 +164,7 @@ export default {
     this.$eventBus.$on('query-form', (payLoad) => {
       this.currentQuery = payLoad;
       this.isActive = !!payLoad;
+      this.$eventBus.$emit('queryform-active', this.isActive);
       if (payLoad) {
         this.queryFields = payLoad.info.fields;
         this.showHidden = false;

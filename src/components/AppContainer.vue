@@ -44,8 +44,38 @@ export default {
           groups: linkColoringTypes,
         },
       });
-
+      this.renderWithEvent();
+    },
+    renderWithEvent() {
       canvas.render();
+      canvas.addEvent('doubleClick', async (payload) => {
+        const nodeId = (payload.nodes.length > 0) ? payload.nodes[0] : null;
+        const nodeInfo = canvas.getNode(nodeId);
+
+        if (nodeInfo.labels.includes('Kanji')) {
+          const resultInfo = await runGet(`${process.env.VUE_APP_BACKEND_URL}/api/info/kanji`, { value: nodeInfo.label });
+          this.undoStack.push(canvas.rawData);
+          canvas.clearNetwork();
+          this.$eventBus.$emit('undo-empty', false);
+          canvas.setData(resultInfo);
+          this.renderWithEvent(canvas);
+        } else if (nodeInfo.labels.includes('Word')) {
+          const resultInfo = await runGet(`${process.env.VUE_APP_BACKEND_URL}/api/info/word`, { value: nodeInfo.label });
+          canvas.clearNetwork();
+          this.undoStack.push(canvas.rawData);
+          this.$eventBus.$emit('undo-empty', false);
+          canvas.setData(resultInfo);
+          this.renderWithEvent(canvas);
+        }
+      });
+    },
+    undo() {
+      if (this.undoStack.length !== 0) {
+        const lastFrame = this.undoStack.pop();
+        canvas.clearNetwork();
+        canvas.setData(lastFrame);
+        this.renderWithEvent(canvas);
+      }
     },
   },
 
@@ -58,6 +88,13 @@ export default {
       console.error(`could not fetch graph visualiation defaultinfo : ${err}`);
     }
     console.log(process.env);
+    this.$eventBus.$on('undo-run', (payload) => {
+      console.debug(payload);
+      this.undo();
+      if (this.undoStack.length === 0) {
+        this.$eventBus.$emit('undo-empty', true);
+      }
+    });
     this.$eventBus.$on('graph-result', (payLoad) => {
       console.debug(payLoad);
       if (payLoad.result) {
@@ -81,6 +118,7 @@ export default {
       noDataReceived: false,
       defaultColoringTypes: [],
       defaultShownProperties: [],
+      undoStack: [],
     };
   },
 
