@@ -1,8 +1,6 @@
 <template>
   <div>
     <div id="GraphControlPanel" v-bind:class="{active:isActive}">
-      <div id="undo-button" v-bind:class="{empty:undoEmpty,qfactive:queryformActive}"
-           @click="sendUndo()"/>
       <b-card no-body class="panel-box nav-panel">
         <b-tabs pills card>
           <b-tab title="" active>
@@ -56,14 +54,8 @@ export default {
     toggle() {
       this.isActive = !this.isActive;
     },
-    sendUndo() {
-      this.$eventBus.$emit('undo-run', true);
-    },
   },
   mounted() {
-    this.$eventBus.$on('undo-empty', (payload) => {
-      this.undoEmpty = payload;
-    });
     this.$eventBus.$on('queryform-active', (payload) => {
       this.queryformActive = payload;
     });
@@ -73,7 +65,6 @@ export default {
       isActive: true,
       // used to fix chrome-firefox bar allignement problem
       ScrollBarAlign: (navigator.appVersion.indexOf('Chrome/') !== -1) ? '0' : '15',
-      undoEmpty: true,
       queryformActive: false,
     };
   },
@@ -121,7 +112,7 @@ export default {
 
   #GraphQueryForm {
     display: flex;
-    box-shadow: -20px 0px 20px 25px rgba(0, 0, 0, 0.75);
+    box-shadow: -10px 0px 10px 12.5px rgba(0, 0, 0, 0.75);
     flex-direction: column;
     background-color: white;
     font-size: 20px;
@@ -131,11 +122,12 @@ export default {
     position: absolute;
     left: 300px;
     color: rgb(65, 90, 145);
-    transition: all 1s ease-out;
+    transition: all 1s ease;
   }
 
   #GraphQueryForm:not(.active) {
-    left: -300px
+    left: 0px;
+    box-shadow: -20px 0px 10px 12.5px rgba(0, 0, 0, 0.75);
   }
 
   /* TABS */
@@ -292,12 +284,11 @@ export default {
     padding: 3px;
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
-    transition: all 1.17s ease 0s;
+    transition: all 0s ease 0s;
   }
 
   #GraphControlPanel.active  #undo-button.qfactive {
     margin-left: 635px;
-    transition: all 1.17s ease 0s;
   }
 
   #undo-button.empty {
@@ -307,6 +298,7 @@ export default {
     padding: 3px;
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
+    transition: all 0s ease 0s;
   }
 
   #undo-button:hover:not(.empty) {
@@ -316,5 +308,6 @@ export default {
     padding: 3px;
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
+    transition: all 0s ease 0s;
   }
 </style>

@@ -1,5 +1,7 @@
 <template>
   <div id="GraphQueryForm" v-bind:class={active:isActive}>
+    <div id="undo-button" v-bind:class="{empty:undoEmpty,qfactive:queryformActive}"
+        @click="sendUndo()"/>
     <b-card no-body class="kankei-formpanel-box">
       <div @click='toggle()' id="QueryFormCloseButton">X</div>
       <h3 id=QueryFormName>
@@ -88,7 +90,9 @@ export default {
         this.$eventBus.$emit('query-list', null);
       }
     },
-
+    sendUndo() {
+      this.$eventBus.$emit('undo-run', true);
+    },
     async publish_query_form() {
       const query = this.currentQuery;
       if (query != null) {
@@ -161,6 +165,9 @@ export default {
     },
   },
   created() {
+    this.$eventBus.$on('undo-empty', (payload) => {
+      this.undoEmpty = payload;
+    });
     this.$eventBus.$on('query-form', (payLoad) => {
       this.currentQuery = payLoad;
       this.isActive = !!payLoad;
@@ -183,7 +190,7 @@ export default {
       currentError: null,
       // currently the field of the kankeiforms are coppied here for easier access
       queryFields: [],
-
+      undoEmpty: true,
       fieldInputs: {},
       selectMap: {},
       queryName: '',
