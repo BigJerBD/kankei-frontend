@@ -2,6 +2,14 @@
   <div class="AppContainer">
     <graph-control-panel/>
     <div id="visual-panel">
+      <div id="canvas-tooltip" class="tooltip_button">
+        <div>?</div>
+        <span class="ttooltiptext">
+          you can doubleclick on
+          <br> <b>Kanji</b> and <b>Words</b>
+          <br> to see what is around them !
+        </span>
+      </div>
       <div id="canvas"></div>
     </div>
   </div>
@@ -137,10 +145,44 @@ export default {
     z-index: 10;
   }
 
+  .AppContainer {
+    color: white;
+    font-size: 18px;
+  }
+
   #canvas {
     width: 100%;
     height: 100%;
   }
 
+  #canvas-tooltip {
+    top: 10px;
+    position: absolute;
+    right: 0px;
+    margin:  10px 30px 20px 20px;
+    padding: 3px 12px;
+    z-index: 101;
+  }
 
+  #canvas-tooltip .ttooltiptext {
+    visibility: hidden;
+    background-color: rgb(65, 90, 145);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 100;
+
+    width: 250px;
+    margin-left: -280px;
+    margin-top: -30px;
+
+  }
+
+  #canvas-tooltip:hover .ttooltiptext {
+    visibility: visible;
+  }
 </style>
