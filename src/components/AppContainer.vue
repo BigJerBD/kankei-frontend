@@ -5,7 +5,7 @@
       <div id="canvas-tooltip" class="tooltip_button">
         <div>?</div>
         <span class="ttooltiptext">
-          you can doubleclick on
+          You can doubleclick on
           <br> <b>Kanji</b> and <b>Words</b>
           <br> to see what is around them !
         </span>
