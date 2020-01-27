@@ -2,13 +2,24 @@
   <div class="AppContainer">
     <graph-control-panel/>
     <div id="visual-panel">
-      <div id="canvas-tooltip" class="tooltip_button">
-        <div>?</div>
-        <span class="ttooltiptext">
-          You can doubleclick on
-          <br> <b>Kanji</b> and <b>Words</b>
-          <br> to see what is around them !
-        </span>
+      <div id=bottomRightCorner>
+        <rectangle-button
+        id="zoomIn"
+        :text="'+'"
+        />
+        <rectangle-button
+        id="zoomOut"
+        :text="'-'"
+        />
+      </div>
+      <div id=topRightCorner>
+        <rectangle-button
+        id="canvasTooltip"
+        :text="'?'"
+        :textTooltip="'You can doubleclick on ' +
+                      '<br> <b>Kanji</b> and <b>Words</b>   '+
+                      '<br> to see what is around them !'"
+      />
       </div>
       <div id="canvas"></div>
     </div>
@@ -17,6 +28,7 @@
 
 <script>
 import GraphControlPanel from './GraphControlPanel.vue';
+import RectangleButton from '../componentsDumb/RectangleButton.vue';
 import '../styles/BaseStyle.css';
 import GraphViz from '../tools/graphviz/graphviz';
 import { runGet } from '../tools/querying';
@@ -28,6 +40,7 @@ export default {
   name: 'AppContainer',
   components: {
     GraphControlPanel,
+    RectangleButton,
   },
   methods: {
     draw_data(
@@ -182,7 +195,21 @@ export default {
 
   }
 
-  #canvas-tooltip:hover .ttooltiptext {
-    visibility: visible;
+  #topRightCorner {
+    top: 10px;
+    position: absolute;
+    right: 0px;
+    margin:  10px 30px 20px 20px;
   }
+
+  #bottomRightCorner {
+    bottom: 10px;
+    position: absolute;
+    right: 0px;
+    margin:  10px 30px 20px 20px;
+  }
+  #bottomRightCorner  #box {
+    margin-bottom:  10px
+  }
+
 </style>
