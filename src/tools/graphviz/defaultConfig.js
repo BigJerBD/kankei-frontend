@@ -44,6 +44,15 @@ const defaultConfig = {
   interaction: {
     hover: true,
     // hoverConnectedEdges: true,
+    keyboard: {
+      enabled: true,
+      speed: {
+        x: 20,
+        y: 20,
+        zoom: 0.06,
+      },
+    },
+    navigationButtons: true,
     selectConnectedEdges: false,
   },
   groups: {

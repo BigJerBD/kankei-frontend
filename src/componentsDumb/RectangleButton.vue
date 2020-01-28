@@ -1,5 +1,5 @@
 <template>
-  <div class="RectangleButton">
+  <div @click='clickCallBack()' class="RectangleButton">
     <div id="box">
     <div id=text >{{text}}</div>
     <span v-if="textTooltip" id="tooltipText" v-html="textTooltip">
@@ -35,6 +35,7 @@ export default {
     padding-left: 12px;
     padding-right: 12px;
     padding-top: 3px;
+    padding-bottom: 3px;
     user-select: none;
  }
 
@@ -48,7 +49,7 @@ export default {
 
     /* Position the tooltip */
     position: absolute;
-    z-index: 100;
+    z-index: 10;
 
     width: 250px;
     /* todo move */

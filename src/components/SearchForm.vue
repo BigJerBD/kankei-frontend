@@ -7,12 +7,11 @@
     </div>
     <div style="display: flex;padding-top: 10px;">
       <button class="search-button" @click="handleSearch"> Search</button>
-      <div class="tooltip_button">
-        <div>?</div>
-        <span class="tooltiptext">
-          <b>{{ tooltipOptions.map((x) => '#' + x).join(", ")}}</b> <br>Can be added to your search
-        </span>
-      </div>
+      <rectangle-button
+        id="searchTooltip"
+        :text="'?'"
+        :textTooltip="'<b>' + tooltipOptionsString + '</b> <br>Can be added to your search'"
+      />
     </div>
 
 
@@ -46,8 +45,13 @@
 </template>
 
 <script>
+import RectangleButton from '../componentsDumb/RectangleButton.vue';
+
 export default {
   name: 'SearchForm',
+  components: {
+    RectangleButton,
+  },
   props: {
     title: String,
     hitlistId: String,
@@ -69,6 +73,11 @@ export default {
     meaningFirst: {
       type: Boolean,
       default: false,
+    },
+  },
+  computed: {
+    tooltipOptionsString() {
+      return this.tooltipOptions.map((x) => `#${x}`).join(', ');
     },
   },
   data() {
@@ -98,18 +107,15 @@ export default {
 
 <style>
 
-  .tooltip_button {
-    background: rgb(65, 90, 145);
-    -moz-border-radius: 70px;
-    -webkit-border-radius: 70px;
-    border-radius: 5px;
-    margin-left: 125px;
+  #searchTooltip {
+    margin-left: 130px;
     margin-top: -10px;
-    padding-left: 12px;
-    padding-right: 12px;
-    padding-top: 3px;
+  }
 
-    user-select: none;
+  #searchTooltip #tooltipText  {
+    margin-left: 30px;
+    margin-bottom: 0px;
+    margin-top: -60px;
   }
 
   .search-form-field {
@@ -117,27 +123,4 @@ export default {
     margin-bottom: 15px;
   }
 
-
-  .tooltip_button .tooltiptext {
-    visibility: hidden;
-    width: 250px;
-    background-color: rgb(65, 90, 145);
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-
-    margin-left: 30px;
-    margin-bottom: 0px;
-    margin-top: -70px;
-
-  }
-
-  .tooltip_button:hover .tooltiptext {
-    visibility: visible;
-  }
 </style>

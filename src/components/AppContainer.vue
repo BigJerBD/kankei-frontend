@@ -2,16 +2,6 @@
   <div class="AppContainer">
     <graph-control-panel/>
     <div id="visual-panel">
-      <div id=bottomRightCorner>
-        <rectangle-button
-        id="zoomIn"
-        :text="'+'"
-        />
-        <rectangle-button
-        id="zoomOut"
-        :text="'-'"
-        />
-      </div>
       <div id=topRightCorner>
         <rectangle-button
         id="canvasTooltip"
@@ -133,6 +123,7 @@ export default {
         }
       }
     });
+    this.draw_data({});
   },
   data() {
     return {
@@ -168,48 +159,46 @@ export default {
     height: 100%;
   }
 
-  #canvas-tooltip {
-    top: 10px;
-    position: absolute;
-    right: 0px;
-    margin:  10px 30px 20px 20px;
-    padding: 3px 12px;
-    z-index: 101;
-  }
-
-  #canvas-tooltip .ttooltiptext {
-    visibility: hidden;
-    background-color: rgb(65, 90, 145);
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 100;
-
-    width: 250px;
-    margin-left: -280px;
-    margin-top: -30px;
-
-  }
 
   #topRightCorner {
     top: 10px;
     position: absolute;
     right: 0px;
     margin:  10px 30px 20px 20px;
+    z-index: 100;
   }
 
-  #bottomRightCorner {
-    bottom: 10px;
-    position: absolute;
-    right: 0px;
-    margin:  10px 30px 20px 20px;
+  div.vis-network div.vis-navigation div.vis-button.vis-zoomExtends {
+    background-image: url(../assets/icon-zoom-extends.png);
+    right: 30px;
+    bottom: 60px;
   }
-  #bottomRightCorner  #box {
-    margin-bottom:  10px
+  div.vis-network div.vis-navigation div.vis-button.vis-zoomIn {
+    background-image: url(../assets/icon-zoom-in.png);
+    right: 30px;
+    bottom: 20px;
+  }
+  div.vis-network div.vis-navigation div.vis-button.vis-zoomOut {
+    background-image: url(../assets/icon-zoom-out.png);
+    right: 70px;
+    bottom: 20px;
   }
 
+
+ div.vis-network div.vis-navigation div.vis-button.vis-right {
+    visibility: hidden;
+  }
+  div.vis-network div.vis-navigation div.vis-button.vis-left {
+    visibility: hidden;
+  }
+  div.vis-network div.vis-navigation div.vis-button.vis-down {
+    visibility: hidden;
+  }
+  div.vis-network div.vis-navigation div.vis-button.vis-up{
+    visibility: hidden;
+  }
+
+  div.vis-network div.vis-navigation div.vis-button:hover {
+    box-shadow: 0 0 3px 3px rgba(56, 21, 207, 0.30);
+  }
 </style>
