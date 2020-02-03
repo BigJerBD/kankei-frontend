@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev" : "vue-cli-service serve --mode development",
+    "dev": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint"
   },
@@ -13,6 +13,7 @@
     "bootstrap-vue": "^2.0.0-rc.28",
     "core-js": "^2.6.5",
     "jquery": "^3.4.1",
+    "mobile-device-detect": "^0.3.3",
     "vis-network": "^5.2.4",
     "vue": "^2.6.10",
     "vue-bulma-accordion": "^0.4.8",

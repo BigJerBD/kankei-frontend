@@ -32,7 +32,7 @@
       </div>
 
       <h3 class="textbox-header"><b> Data Sources </b></h3>
-      <div class="double-column">
+      <div v-bind:class="columnClassLayout">
         <a href="http://www.edrdg.org/jmdict/edict_doc.html"><h4 class="textbox-subheader">
           JMdict</h4></a>
         <p class="textbox-style subtextbox-style">
@@ -62,7 +62,7 @@
         </p>
       </div>
 
-      <div class="double-column">
+      <div v-bind:class="columnClassLayout">
         <a href="http://kanjivg.tagaini.net/"><h4 class="textbox-subheader">KanjiVG</h4></a>
         <p class="textbox-style subtextbox-style">
           by Ulrich Apel and several contributors,<br> <br> It contains all the strokes and
@@ -85,6 +85,7 @@
 </template>
 
 <script>
+import { isMobile } from 'mobile-device-detect';
 import AppHeader from '../components/AppHeader.vue';
 import '../styles/BaseStyle.css';
 import '../styles/TextContent.css';
@@ -93,6 +94,11 @@ export default {
   name: 'Home',
   components: {
     AppHeader,
+  },
+  data() {
+    return {
+      columnClassLayout: isMobile ? 'single-column' : 'double-column',
+    };
   },
 };
 </script>

@@ -3,13 +3,8 @@
   outline: none !important;
 }
 
-#App {
-
-  font-family: Roboto, sans-serif ;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  margin: 0
+b {
+  font-weight: 525;
 }
 
 body {

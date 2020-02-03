@@ -1,10 +1,6 @@
   .single-column {
-    /*padding-left: 28%;*/
-    /*padding-right: 28%;*/
-
     margin: auto;
-    width: 55%;
-    padding: 25px;
+    padding: 30px;
   }
 
   .double-column {
