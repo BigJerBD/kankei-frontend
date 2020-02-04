@@ -1,6 +1,6 @@
 <template>
   <div id="GraphQueryForm" v-bind:class={active:isActive}>
-    <div id="undo-button" v-bind:class="{empty:undoEmpty,qfactive:queryformActive}"
+    <div id="undo-button" v-bind:class="{empty:undoEmpty}"
         @click="sendUndo()"/>
     <b-card no-body class="kankei-formpanel-box">
       <div @click='toggle()' id="QueryFormCloseButton">X</div>
@@ -11,7 +11,7 @@
         {{currentError}}
       </div>
       <div v-if="hasNoDataResponse" class="query-state-msg" v-bind:class={active:isActive}>
-        No data received.<br> Maybe change the parameters a little bit?
+        Found Nothing.<br> Maybe change the parameters a little bit?
       </div>
       <img v-else-if="isLoading" id="LoadingIcon" class="query-state-msg" style="width: 50px"
            src="../assets/loading1.gif"
@@ -25,6 +25,7 @@
             <h4>{{queryField.name}}</h4>
 
             <b-form-input
+              @keydown.enter.native="publish_query_form()"
               v-if="queryField.type === 'single'"
               v-model="fieldInputs[queryField['template_name']]"
             ></b-form-input>
@@ -46,6 +47,7 @@
 
                     <h4>{{subfield.name}}</h4>
                     <b-form-input
+                      @keydown.enter.native="publish_query_form()"
                       v-model="fieldInputs
                       [queryField['template_name']][1][subfield['template_name']]"
                     ></b-form-input>
@@ -65,6 +67,7 @@
         </a>
 
         <button class=" send-form-button"
+                v-on:keyup.enter="publish_query_form()"
                 @click="publish_query_form()"> Get data
         </button>
 
@@ -93,6 +96,7 @@ export default {
     sendUndo() {
       this.$eventBus.$emit('undo-run', true);
     },
+
     async publish_query_form() {
       const query = this.currentQuery;
       if (query != null) {

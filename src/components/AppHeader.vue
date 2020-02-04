@@ -73,7 +73,7 @@ export default {
     handleResize() {
       window.width = window.innerWidth;
       window.height = window.innerHeight;
-      this.$forceUpdate();    
+      this.$forceUpdate();
     },
   },
 };
