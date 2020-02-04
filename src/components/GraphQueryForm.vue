@@ -281,6 +281,8 @@ export default {
   }
 
   .query-state-msg.active {
+    z-index: -1;
+    user-select: none;
     text-align: center;
     position: fixed;
     top: 50vh;
