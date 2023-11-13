@@ -1,6 +1,6 @@
 # kankei-frontend
 
-Kankei is a project focus on creating a tool to help people learn about kanji. 
+Kankei is a university project focusing on creating a tool to help people learn about kanji. 
 It currently contains about 200 000 japanese words and about 10 000 kanji
 
 Kankei-Frontend is only a single part of the whole project. It contains a SPA application
